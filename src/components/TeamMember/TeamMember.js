@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TeamMember.css';
 import MatterEmptyAvatar from '../../assets/matter_empty_avatar.svg';
+import { Button } from '@mui/material';
 
 class TeamMember extends React.PureComponent {
   static propTypes = {
@@ -19,6 +20,13 @@ class TeamMember extends React.PureComponent {
   };
 
   render() {
+    const isNewTeammate = this.props.title.toLowerCase() === "new teammate";
+
+    const onClickJoin = () => {
+        this.props.setOpen(true);
+    };
+
+
     return (
       <div className="container">
         <header>
@@ -32,7 +40,8 @@ class TeamMember extends React.PureComponent {
           <h2 className="title">{this.props.title}</h2>
           <h1 className="name">{this.props.name}</h1>
         </header>
-        <div className="body">{this.props.story}</div>
+        {isNewTeammate ? <div className="bodyButton"><Button variant='contained' onClick={onClickJoin}>Join the team!</Button></div> : 
+        <div className="body">{this.props.story}</div>}
         <footer style={{ backgroundColor: this.props.favoriteColor }}>
           <div className="full-width-flex-box">
             <div className="one-third-flex-box stat">9.0</div>
